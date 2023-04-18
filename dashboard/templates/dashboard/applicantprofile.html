@@ -134,15 +134,11 @@
                                 <div class="card-status">
                                     <br>
                                     <div class="card-body">
-                                        <form method="POST" action="{% url 'adminstatus' team.pk %}">
+                                        <form method="POST" action="{% url 'statusur' team.id %}">
                                             {% csrf_token %}
-                                            <select id="status" name="status" class="form-control">
+                                            <select  name="status" class="form-control">
                                                 {% for choice in team.STATUS %}
-                                                  {% if choice.0 == team.status %}
-                                                    <option value="{{ choice.0 }}" selected>{{ choice.1 }}</option>
-                                                  {% else %}
-                                                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-                                                  {% endif %}
+                                                <option value="{{ choice.0 }}" {% if choice.0 == team.status %}selected{% endif %}>{{choice.1}}</option>
                                                 {% endfor %}
                                               </select>
                                               <br>

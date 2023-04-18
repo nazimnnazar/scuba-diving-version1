@@ -12,5 +12,6 @@ urlpatterns = [
     path('team/<int:team_id>/member/<int:member_id>/download/<str:field_name>/', views.download_member_file, name='download_member_file'),
     path('search',views.search_leaders,name="search"),
     path('team/<int:team_id>/edit/', views.team_edit, name='team_edit'),
+    path('statusu/<int:status_id>',views.statusur,name='statusur'),
     # path('adminpermit/<int:team_id>/',views.adminpermit,name='adminpermit'),
     ]

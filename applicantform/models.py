@@ -16,12 +16,7 @@ class Team(models.Model):
         ('Veg', 'Veg'),
         ('Non-veg', 'Non-veg'),
     )
-    STATUS = (
-        ('Processing','Processing'),
-        ('open','open'),
-        ('Confirm','Confirm'),
-        ('Closed','Closed'),
-    )
+    
     PACKAGE=(
         ('Bubble Maker', 'Bubble Maker '),
         ('Seal Team', 'Seal Team'),
@@ -50,7 +45,12 @@ class Team(models.Model):
         ('Open Water To Dive Master','Open Water To Dive Master'),
         ('Explore Lakshadweep','Explore Lakshadweep'),
     )
-    
+    STATUS = (
+        ('Processing','Processing'),
+        ('open','open'),
+        ('Confirm','Confirm'),
+        ('Closed','Closed'),
+    )
     PERMIT =(
         ('Applied','Applied'),
         ('Need to apply','Need to apply'),

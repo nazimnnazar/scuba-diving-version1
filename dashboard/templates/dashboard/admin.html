@@ -1,0 +1,78 @@
+{% extends 'dashboard/base.html' %}
+{% load static  %}
+{% block title %} DashBoard {% endblock %}
+{% block content %}
+<main id="main" class="main">
+    {% if messages %}
+    {% for i in messages %}
+    <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show" role="alert">
+         {{i}}
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="card"> 
+        <div class="card-body">
+            <div class="table-responsive">
+                <br>
+                <div class="input-box">
+                    <i class="uil uil-search"></i>
+                    <input  id="search" type="text" placeholder="Search ..." />
+                    <button id="search-btn" class="button">Search</button>
+                  </div>
+
+                <table class="table table-bordered table-hover" id="myTable">
+                    <br>
+                    <thead >
+                        <tr class="table-primary" id="chk-th">
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>contact</th>
+                            <th>Package</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in leader reversed %}
+                        <tr>
+                            <td>{{i.id}}</td>
+                            <td>{{i.leader_name}}</td>
+                            <td>{{i.leader_contact_number}}</td>
+                            <td>{{i.package}}</td>
+                            {% if i.status == 'Processing' %}
+                            <td class="text-warning"><strong>{{i.status}}</strong></td>
+                            {% elif i.status == 'open' %}
+                            <td class="text-success"><strong>{{i.status}}</strong></td>
+                            {% elif i.status == 'Confirm' %}
+                            <td class="text-primary"><strong>{{i.status}}</strong></td>
+                            {% else %}
+                            <td class="text-danger"><strong>{{i.status}}</strong></td>
+                            {% endif %}
+                            <td><a href="{% url 'leader_member' i.id %}" class="btn btn-sm btn-primary">Detail</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <span class="text-danger" id="no-data"></span>
+            </div>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tbody tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+        if($("#myTable tbody tr:visible").length == 0){
+            $("#no-data").html("No data found");
+        }else{
+            $("#no-data").html("");
+        }
+    });
+});
+</script>
+{% endblock %}
